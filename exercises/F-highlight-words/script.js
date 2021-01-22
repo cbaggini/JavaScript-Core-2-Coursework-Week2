@@ -1,15 +1,5 @@
 function highlightWords(paragraph, colours) {
   let content = document.getElementById('content');
-  let para = document.createElement('p');
-  paragraph.split(' ').forEach(el => {
-	  let span = document.createElement('span');
-	  span.innerText = `${el} `;
-	  span.addEventListener('click', e => {
-		  let sel = document.querySelector('select');
-		  e.target.style.backgroundColor = sel.value;
-	  });
-	  para.append(span);
-  });
   let dropDown = document.createElement('select');
   colours.forEach(el => {
 	  let opt = document.createElement('option');
@@ -17,6 +7,17 @@ function highlightWords(paragraph, colours) {
 	  opt.innerHTML = el;
 	  dropDown.append(opt);
   });
+  let para = document.createElement('p');
+  paragraph.split(' ').forEach(el => {
+	  let span = document.createElement('span');
+	  span.innerText = `${el} `;
+	  span.addEventListener('click', e => {
+		  //let sel = document.querySelector('select');
+		  e.target.style.backgroundColor = dropDown.value;
+	  });
+	  para.append(span);
+  });
+
   content.append(dropDown);
   content.append(para);
 }

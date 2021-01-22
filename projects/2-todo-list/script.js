@@ -10,11 +10,16 @@ function populateTodoList(todos) {
                         </span>
                     </li>`
   });
-  list.innerHTML = str;
+  list.innerHTML += str;
 }
 
 function done (el) {
-	el.parentElement.parentElement.style.textDecoration = "line-through";
+	if (el.parentElement.parentElement.style.textDecoration === "line-through") {
+		el.parentElement.parentElement.style.textDecoration = "none";
+	} else {
+		el.parentElement.parentElement.style.textDecoration = "line-through";
+	}
+	
 }
 
 function deleteItem (el) {
@@ -35,15 +40,18 @@ function addNewTodo(event) {
   // The code below prevents the page from refreshing when we click the 'Add Todo' button.
   event.preventDefault();
   // Write your code here... and remember to reset the input field to be blank after creating a todo!
-  let newTodo = event.target.parentElement.previousElementSibling.firstElementChild;
-  str = `<li class="list-group-item d-flex justify-content-between align-items-center">${newTodo.value}
-                        <span class="badge bg-primary rounded-pill">
-                            <i class="fa fa-check" aria-hidden="true" onclick="done(this)"></i>
-                            <i class="fa fa-trash" aria-hidden="true" onclick="deleteItem(this)"></i>
-                        </span>
-					</li>`
+   let newTodo = event.target.parentElement.previousElementSibling.firstElementChild;
+//   str = `<li class="list-group-item d-flex justify-content-between align-items-center">${newTodo.value}
+//                         <span class="badge bg-primary rounded-pill">
+//                             <i class="fa fa-check" aria-hidden="true" onclick="done(this)"></i>
+//                             <i class="fa fa-trash" aria-hidden="true" onclick="deleteItem(this)"></i>
+//                         </span>
+// 					</li>`
+	let newTodoList = [{task: newTodo.value, completed: false}];
 	let list = document.getElementById("todo-list");
-	list.innerHTML += str;
+	//list.innerHTML += str;
+	populateTodoList(newTodoList)
+	//list.append(newTodoList);
 	newTodo.value = '';
 }
 
