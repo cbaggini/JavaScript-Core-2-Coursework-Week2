@@ -40,10 +40,13 @@ function addNewTodo(event) {
   // The code below prevents the page from refreshing when we click the 'Add Todo' button.
   	event.preventDefault();
   // Write your code here... and remember to reset the input field to be blank after creating a todo!
-   	let newTodo = event.target.parentElement.previousElementSibling.firstElementChild;
-	let newTodoList = [{task: newTodo.value, completed: false}];
-	populateTodoList(newTodoList)
-	newTodo.value = '';
+	let newTodo = event.target.parentElement.previousElementSibling.firstElementChild;
+	if (newTodo.value) {
+		let newTodoList = [{task: newTodo.value, completed: false}];
+		populateTodoList(newTodoList);
+		newTodo.value = '';
+	} 
+	
 }
 
 // Advanced challenge: Write a fucntion that checks the todos in the todo list and deletes the completed ones (we can check which ones are completed by seeing if they have the line-through styling applied or not).
